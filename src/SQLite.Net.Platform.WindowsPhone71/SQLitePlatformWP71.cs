@@ -1,5 +1,4 @@
 ﻿using SQLite.Net.Interop;
-using SQLite.Net.Platform.WindowsPhone8;
 
 namespace SQLite.Net.Platform.WindowsPhone71
 {
@@ -7,7 +6,7 @@ namespace SQLite.Net.Platform.WindowsPhone71
     {
         public SQLitePlatformWP71()
         {
-            var api = new SQLiteApiWP8();
+            var api = new SQLiteApiWP71();
 
 //            api.SetDirectory(/*temp directory type*/2, Windows.Storage.ApplicationData.Current.TemporaryFolder.Path);
 

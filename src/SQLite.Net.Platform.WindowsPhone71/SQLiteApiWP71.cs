@@ -3,9 +3,9 @@ using System.Text;
 using Community.CsharpSqlite;
 using SQLite.Net.Interop;
 
-namespace SQLite.Net.Platform.WindowsPhone8
+namespace SQLite.Net.Platform.WindowsPhone71
 {
-    public class SQLiteApiWP8 : ISQLiteApi
+    public class SQLiteApiWP71 : ISQLiteApi
     {
         public Result Open(byte[] filename, out IDbHandle db, int flags, IntPtr zVfs)
         {

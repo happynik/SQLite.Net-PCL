@@ -11,7 +11,7 @@ namespace SQLite.Net.Platform.WindowsPhone71
         {
             string dbFileName = Encoding.UTF8.GetString(filename, 0, filename.Length -1 );
             Sqlite3.sqlite3 internalDbHandle = null;
-            var ret = (Result)Sqlite3.sqlite3_open_v2(dbFileName, out internalDbHandle, flags, "");
+            var ret = (Result)Sqlite3.sqlite3_open(dbFileName, ref internalDbHandle);
             db = new DbHandle(internalDbHandle);
             return ret;
         }
@@ -73,7 +73,7 @@ namespace SQLite.Net.Platform.WindowsPhone71
         {
             var dbStatement = (DbStatement)stmt;
             var internalStmt = dbStatement.InternalStmt;
-            return (Result)Sqlite3.sqlite3_finalize(internalStmt);
+            return (Result)Sqlite3.sqlite3_finalize(ref internalStmt);
         }
 
         public long LastInsertRowid(IDbHandle db)
@@ -192,7 +192,7 @@ namespace SQLite.Net.Platform.WindowsPhone71
         public Result Open(string filename, out IDbHandle db)
         {
             Sqlite3.sqlite3 internalDbHandle = null;
-            var ret = (Result)Sqlite3.sqlite3_open(filename, out internalDbHandle);
+            var ret = (Result)Sqlite3.sqlite3_open(filename, ref internalDbHandle);
             db = new DbHandle(internalDbHandle);
             return ret;
         }
@@ -229,7 +229,7 @@ namespace SQLite.Net.Platform.WindowsPhone71
                 InternalDbHandle = internalDbHandle;
             }
 
-            public Sqlite3.sqlite3 InternalDbHandle { get; set; }
+            public Sqlite3.sqlite3 InternalDbHandle { get; private set; }
 
             public bool Equals(IDbHandle other)
             {
@@ -245,7 +245,7 @@ namespace SQLite.Net.Platform.WindowsPhone71
                 InternalStmt = internalStmt;
             }
 
-            internal Sqlite3.Vdbe InternalStmt { get; set; }
+            internal Sqlite3.Vdbe InternalStmt { get; private set; }
 
             public bool Equals(IDbStatement other)
             {
